@@ -1,0 +1,64 @@
+.editor-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  animation: fadeInUp 0.5s ease 0.1s both;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.editor-tab-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+}
+
+.editor-lang {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.editor-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--text-muted);
+  font-size: 15px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editor-placeholder-icon {
+  font-size: 48px;
+  opacity: 0.4;
+}
+
+.editor-line-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}

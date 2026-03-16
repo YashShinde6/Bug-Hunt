@@ -1,0 +1,95 @@
+.analyze-btn-wrapper {
+  animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.analyze-btn {
+  width: 100%;
+  padding: 16px 32px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gradient-primary);
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.analyze-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: var(--transition-normal);
+}
+
+.analyze-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+}
+
+.analyze-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.analyze-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.analyze-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.analyze-btn-loading {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-glow);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.analyze-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.analyze-stages {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analyze-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  animation: fadeIn 0.3s ease;
+}
+
+.analyze-stage-active {
+  color: var(--accent-cyan);
+}
+
+.analyze-stage-done {
+  color: var(--accent-green);
+}
