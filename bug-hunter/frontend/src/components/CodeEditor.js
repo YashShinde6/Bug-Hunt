@@ -53,6 +53,8 @@ export default function CodeEditor({ code, language, bugLines }) {
     );
   }, [bugLines]);
 
+  const isImagePending = language === 'image' && code.startsWith('//');
+
   if (!code) {
     return (
       <div className="editor-container">
@@ -65,6 +67,29 @@ export default function CodeEditor({ code, language, bugLines }) {
         <div className="editor-placeholder">
           <span className="editor-placeholder-icon">📝</span>
           Upload a file to view its contents
+        </div>
+      </div>
+    );
+  }
+
+  if (isImagePending) {
+    return (
+      <div className="editor-container">
+        <div className="editor-header">
+          <div className="editor-tab">
+            <span className="editor-tab-dot" style={{ background: '#a78bfa' }}></span>
+            Screenshot Upload
+          </div>
+          <span className="editor-lang">image</span>
+        </div>
+        <div className="editor-placeholder" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)' }}>
+          <span className="editor-placeholder-icon" style={{ fontSize: '3rem' }}>📸</span>
+          <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#c4b5fd', marginTop: '0.5rem' }}>
+            Screenshot uploaded
+          </div>
+          <div style={{ fontSize: '0.85rem', color: '#8b5cf6', marginTop: '0.25rem' }}>
+            Click <strong>"Analyze"</strong> to extract code via Gemini Vision OCR
+          </div>
         </div>
       </div>
     );

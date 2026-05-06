@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 class Settings:
@@ -31,7 +31,7 @@ class Settings:
 
     # LLM Endpoints
     OPENROUTER_URL: str = "https://openrouter.ai/api/v1/chat/completions"
-    GEMINI_URL: str = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+    GEMINI_URL: str = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
     GROQ_URL: str = "https://api.groq.com/openai/v1/chat/completions"
 
     @property

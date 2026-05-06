@@ -29,6 +29,8 @@ class AnalyzeResponse(BaseModel):
     bugs: list[dict]
     summary: dict
     timestamp: float
+    extracted_code: Optional[str] = None
+    detected_language: Optional[str] = None
 
 
 @router.post("/upload")
@@ -93,10 +95,12 @@ async def analyze_file(request: AnalyzeRequest):
 
     response = AnalyzeResponse(
         file_name=os.path.basename(request.file_path),
-        language=language,
+        language=result.get("detected_language", language),
         bugs=result.get("bugs", []),
         summary=result.get("summary", {}),
         timestamp=time.time(),
+        extracted_code=result.get("extracted_code"),
+        detected_language=result.get("detected_language"),
     )
 
     # Store in history

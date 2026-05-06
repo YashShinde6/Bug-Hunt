@@ -47,7 +47,7 @@ async def _handle_image(file_path: str, log: list) -> dict:
     """Handle image input: OCR → parse → analyze."""
     log.append("Stage 1: OCR extraction from image")
 
-    ocr_result = extract_code_from_image(file_path)
+    ocr_result = await extract_code_from_image(file_path)
 
     if not ocr_result["success"]:
         return {
@@ -56,7 +56,7 @@ async def _handle_image(file_path: str, log: list) -> dict:
                 "line_number": 0,
                 "explanation": ocr_result.get("error", "Failed to extract code from image"),
                 "impact": "Cannot analyze code",
-                "suggested_fix": "Ensure the image contains readable code and Tesseract is installed",
+                "suggested_fix": "Ensure the image contains readable code and a valid GEMINI_API_KEY is set in .env",
                 "historical_bugs": [],
             }],
             "summary": {
@@ -67,11 +67,20 @@ async def _handle_image(file_path: str, log: list) -> dict:
         }
 
     code = ocr_result["code"]
-    # Try to detect language from content
-    language = _detect_language_from_code(code)
-    log.append(f"OCR extracted {ocr_result['line_count']} lines, detected language: {language}")
+    # Use the language detected by the OCR tool (Gemini Vision detects it)
+    language = ocr_result.get("language", _detect_language_from_code(code))
+    ocr_method = ocr_result.get("method", "unknown")
+    log.append(f"OCR extracted {ocr_result['line_count']} lines via {ocr_method}, detected language: {language}")
 
-    return await _handle_code(file_path, code, language, log, from_ocr=True)
+    result = await _handle_code(file_path, code, language, log, from_ocr=True)
+
+    # Attach the extracted code so the frontend can display it
+    result["extracted_code"] = code
+    result["detected_language"] = language
+    result["summary"]["ocr_method"] = ocr_method
+    result["summary"]["ocr_lines_extracted"] = ocr_result["line_count"]
+
+    return result
 
 
 async def _handle_csv(file_path: str, language: str, log: list) -> dict:

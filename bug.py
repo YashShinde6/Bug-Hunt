@@ -9,7 +9,7 @@ def calculate_average(numbers):
     for i in range(len(numbers)):
         total = total + numbers[i]
     
-    average = total / len(numbers)  # BUG: division by zero if list is empty
+    average = total / len(numbers) 
     
     return average
 
@@ -22,12 +22,12 @@ def find_max(numbers):
         if numbers[i] > max_val:
             max_val = numbers[i]
     
-    return max_value   # BUG: variable name incorrect
+    return max_value 
 
 
 def divide_numbers(a, b):
     
-    result = a / b   # BUG: division by zero possible
+    result = a / b 
     
     return result
 
@@ -35,7 +35,7 @@ def divide_numbers(a, b):
 def process_data(data):
 
     for i in range(len(data)):
-        print(data[i+1])   # BUG: index out of range
+        print(data[i+1])  
 
 
 def compute_square_root(x):
@@ -43,7 +43,7 @@ def compute_square_root(x):
     if x < 0:
         print("negative number")
     
-    return math.sqrt(x)   # BUG: sqrt of negative number
+    return math.sqrt(x) 
 
 
 def main():
@@ -66,7 +66,7 @@ def main():
     root = compute_square_root(-9)
     print(root)
 
-    print(undefined_variable)  # BUG: undefined variable
+    print(undefined_variable) 
 
 
 if __name__ == "__main__":

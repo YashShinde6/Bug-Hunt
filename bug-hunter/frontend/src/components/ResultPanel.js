@@ -28,6 +28,37 @@ export default function ResultPanel({ results }) {
       {/* Summary */}
       {summary && (
         <div className="results-summary">
+          {summary.from_ocr && (
+            <div className="ocr-info-card" style={{
+              background: 'linear-gradient(135deg, #1e1b4b, #312e81)',
+              border: '1px solid #4c1d95',
+              borderRadius: '10px',
+              padding: '12px 16px',
+              marginBottom: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+            }}>
+              <span style={{ fontSize: '1.5rem' }}>📸</span>
+              <div>
+                <div style={{ fontWeight: 600, color: '#c4b5fd', fontSize: '0.9rem' }}>
+                  Code Extracted via OCR
+                  {summary.ocr_method && (
+                    <span style={{
+                      marginLeft: '8px', fontSize: '0.7rem', padding: '2px 8px',
+                      background: '#4c1d95', borderRadius: '12px', color: '#a78bfa',
+                    }}>
+                      {summary.ocr_method === 'gemini_vision' ? '✨ Gemini Vision' : '🔤 Tesseract'}
+                    </span>
+                  )}
+                </div>
+                <div style={{ color: '#8b5cf6', fontSize: '0.8rem', marginTop: '2px' }}>
+                  {summary.ocr_lines_extracted || summary.line_count || 0} lines extracted
+                  {summary.file_type && summary.file_type !== 'image' && ` • Detected: ${summary.file_type}`}
+                </div>
+              </div>
+            </div>
+          )}
           <div className="results-summary-grid">
             <div className="summary-stat">
               <div className="summary-stat-value" style={{ color: 'var(--accent-red)' }}>
